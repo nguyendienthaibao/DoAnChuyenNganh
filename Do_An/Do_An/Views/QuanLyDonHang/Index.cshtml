@@ -1,0 +1,27 @@
+﻿@model List<Do_An.Models.DonHang>
+
+<h2>Quản Lý Đơn Hàng</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã Đơn Hàng</th>
+            <th>Khách Hàng</th>
+            <th>Ngày Đặt</th>
+            <th>Tùy Chọn</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var donHang in Model)
+        {
+            <tr>
+                <td>@donHang.MaDonHang</td>
+                <td>@donHang.KhachHang.HoTen</td>
+                <td>@donHang.NgayDat.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @Html.ActionLink("Chi Tiết", "ChiTietDonHang", new { maDonHang = donHang.MaDonHang }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

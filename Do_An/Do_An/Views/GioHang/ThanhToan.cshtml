@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Thanh Toán";
+}
+
+<div class="checkout-container">
+    <h2>Thông tin thanh toán</h2>
+
+    <div class="checkout-section">
+        <h3>Thông tin người mua</h3>
+        @using (Html.BeginForm("ThanhToan", "GioHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="hoTen">Họ tên:</label>
+                <input type="text" id="hoTen" name="hoTen" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="sdt">Số điện thoại:</label>
+                <input type="tel" id="sdt" name="sdt" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="diaChi">Địa chỉ giao hàng:</label>
+                <input type="text" id="diaChi" name="diaChi" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="phuongThucThanhToan">Phương thức thanh toán:</label>
+                <select id="phuongThucThanhToan" name="phuongThucThanhToan" class="form-control" required>
+                    <option value="QR">Quét mã QR</option>
+                    <option value="ATM">Chuyển khoản ngân hàng</option>
+                    <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                </select>
+            </div>
+
+            <div id="paymentDetails" style="display: none;">
+                <div id="qrPaymentSection" style="display: none;">
+                    <h3>Quét mã QR để thanh toán:</h3>
+                    <img src="~/HinhAnhSP/maqr.png" alt="QR Code" class="qr-code" />
+                </div>
+
+                <div id="bankTransferSection" style="display: none;">
+                    <h3>Chuyển khoản đến tài khoản ngân hàng:</h3>
+                    <p>Số tài khoản: <strong>29112003501</strong></p>
+                    <p>Chủ tài khoản: <strong>NGUYEN DIEN THAI BAO</strong></p>
+                    <p>Ngân hàng: <strong>Ngân hàng TMCP Tiên Phong - TPBANK</strong></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentScreenshot">Tải ảnh chụp màn hình đã thanh toán:</label>
+                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn-confirm-order" onclick="return confirmOrder()">Xác nhận đơn hàng</button>
+        }
+    </div>
+</div>
+
+<!-- CSS for styling the checkout page -->
+<style>
+    .checkout-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+        .checkout-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+    .checkout-section {
+        margin-bottom: 30px;
+    }
+
+        .checkout-section h3 {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .btn-confirm-order {
+        display: block;
+        width: 100%;
+        background-color: #303030;
+        color: #fff;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-confirm-order:hover {
+            background-color: coral;
+        }
+
+    .qr-code {
+        display: block;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        max-width: 250px;
+    }
+</style>
+
+<!-- JavaScript for handling form submission and payment method selection -->
+<script>
+    document.getElementById('phuongThucThanhToan').addEventListener('change', function () {
+        var paymentDetails = document.getElementById('paymentDetails');
+        var qrPaymentSection = document.getElementById('qrPaymentSection');
+        var bankTransferSection = document.getElementById('bankTransferSection');
+
+        paymentDetails.style.display = 'none';
+        qrPaymentSection.style.display = 'none';
+        bankTransferSection.style.display = 'none';
+
+        if (this.value === 'QR') {
+            paymentDetails.style.display = 'block';
+            qrPaymentSection.style.display = 'block';
+        } else if (this.value === 'ATM') {
+            paymentDetails.style.display = 'block';
+            bankTransferSection.style.display = 'block';
+        }
+    });
+
+    function confirmOrder() {
+        alert("Đơn hàng của bạn đã được đặt thành công!");
+        return true;
+    }
+</script>

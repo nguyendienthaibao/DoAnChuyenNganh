@@ -1,0 +1,29 @@
+﻿@model List<Do_An.Models.ChiTietDonHang>
+
+<h2>Chi Tiết Đơn Hàng #@Model.First().MaDonHang</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã Sách</th>
+            <th>Tên Sách</th>
+            <th>Số Lượng</th>
+            <th>Đơn Giá</th>
+            <th>Thành Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var chiTiet in Model)
+        {
+            <tr>
+                <td>@chiTiet.MaSach</td>
+                <td>@chiTiet.Sach.TenSach</td>
+                <td>@chiTiet.SoLuong</td>
+                <td>@String.Format("{0:N0}", chiTiet.DonGia)</td>
+                <td>@String.Format("{0:N0}", chiTiet.SoLuong * chiTiet.DonGia)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "QuanLyDonHang")" class="btn btn-primary">Quay Lại</a>

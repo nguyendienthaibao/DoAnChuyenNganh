@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Xác nhận đơn hàng";
+}
+
+<div class="confirmation-message">
+    <h2>@ViewBag.Message</h2>
+    <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
+</div>
+
+<style>
+    .confirmation-message {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+        .confirmation-message h2 {
+            color: #333;
+        }
+
+        .confirmation-message p {
+            color: #666;
+        }
+</style>
